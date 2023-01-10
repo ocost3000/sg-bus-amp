@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/bus/{arrivals}": {
+      "name": "/bus/{arrivals}",
+      "lambdaFunction": "busarrivals",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "api": {
+    "LTA": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "busarrivals"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "busarrivals": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_busarrivals_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "busarrivals"
+        }
+      ]
+    },
+    "AMPLIFY_function_busarrivals_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "busarrivals"
+        }
+      ]
+    }
+  }
+}

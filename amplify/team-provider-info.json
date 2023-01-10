@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sgbusamp-dev-212343-authRole",
+      "UnauthRoleArn": "arn:aws:iam::628236119651:role/amplify-sgbusamp-dev-212343-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::628236119651:role/amplify-sgbusamp-dev-212343-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-sgbusamp-dev-212343-deployment",
+      "UnauthRoleName": "amplify-sgbusamp-dev-212343-unauthRole",
+      "StackName": "amplify-sgbusamp-dev-212343",
+      "StackId": "arn:aws:cloudformation:us-west-2:628236119651:stack/amplify-sgbusamp-dev-212343/74528590-8e4b-11ed-8575-0a85c6c9b5ef",
+      "AmplifyAppId": "d21ooh8s6woxdg"
+    },
+    "categories": {
+      "function": {
+        "busarrivals": {
+          "deploymentBucketName": "amplify-sgbusamp-dev-212343-deployment",
+          "s3Key": "amplify-builds/busarrivals-38373168475338647837-build.zip"
+        }
+      },
+      "api": {
+        "LTA": {}
+      }
+    }
+  }
+}
