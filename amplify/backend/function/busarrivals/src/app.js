@@ -10,8 +10,12 @@ See the License for the specific language governing permissions and limitations 
 
 
 const express = require('express')
+const http = require('http')
+const https = require('https')
+const axios = require('axios').default
 const bodyParser = require('body-parser')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+const { Http2ServerRequest } = require('http2')
 
 // declare a new express app
 const app = express()
@@ -25,19 +29,68 @@ app.use(function(req, res, next) {
   next()
 });
 
+/****************************************
+ * TODO: Setup access to secret API Key *
+ ****************************************/
+const secretHeader = {"X-Aws-Parameters-Secrets-Token": process.env.AWS_SESSION_TOKEN};
+const apiSecretEndpoint = "http://localhost:" +
+    process.env.PARAMETERS_SECRETS_EXTENSION_HTTP_PORT +
+    "/secretsmanager/get?secretId=" +
+    "SGBUS_API_Key";
+// let LTA_API_KEY = "";
+// http.get(apiSecretEndpoint, secretHeader, (res) => {
+//   console.log('Requested Secret');
+// 
+//   res.on('data', (d) => {
+//     console.log('Secret successfully accessed');
+//     LTA_API_KEY = d.toString();
+//   });
+// 
+// }).on('error', (e) => {
+//   console.error(`Error requesting secret: ${e}`);
+// })
+
+// TODO: Test AXIOS
+async function getApiKeyHeader() {
+  const response = await axios.get(apiSecretEndpoint, { headers: secretHeader });
+  return { AccountKey: response.toString() };
+}
+
+/**********************
+ * Connect to LTA API *
+ **********************/
+const ltaApiEndpoint = 'http://datamall2.mytransport.sg/ltaodataservice';
+// http://datamall2.mytransport.sg/ltaodataservice/BusArrivalv2?BusStopCode=83139
 
 /**********************
  * Example get method *
  **********************/
 
-app.get('/bus/:arrivals', function(req, res) {
-  // Add your code here
-  res.json({success: `Request arrival for bus ${req.params.arrivals}`, url: req.url});
-});
+app.get('/bus/:arrivals', async function(req, res) {
+  // Do API Call on bus station
+  const ltaBusArrivalsEndpoint = `${ltaApiEndpoint}/BusArrivalv2/?BusStopCode=${req.params.arrivals}`;
+  const ltaHeaders = null;
 
-app.get('/bus/:arrivals/*', function(req, res) {
-  // Add your code here
-  res.json({success: 'get call succeed!', url: req.url});
+  try {
+    ltaHeaders = await getApiKeyHeader();
+    console.log("Axios retrieved secret");
+  } catch (error) {
+    console.error("Axios failed secret");
+    res.json(error);
+    return;
+  }
+
+
+  try {
+    const response = await axios.get(ltaBusArrivalsEndpoint, { headers: ltaHeaders });
+    console.log("Axios retrieve LTA Request");
+    res.json(response);
+  } catch (error) {
+    console.error("Axios failed LTA Request");
+    res.json(error);
+    return;
+  }
+
 });
 
 app.listen(3000, function() {

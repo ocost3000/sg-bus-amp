@@ -22,5 +22,29 @@
         "LTA": {}
       }
     }
+  },
+  "sgbusamp": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sgbusamp-sgbusamp-130444-authRole",
+      "UnauthRoleArn": "arn:aws:iam::628236119651:role/amplify-sgbusamp-sgbusamp-130444-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::628236119651:role/amplify-sgbusamp-sgbusamp-130444-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-sgbusamp-sgbusamp-130444-deployment",
+      "UnauthRoleName": "amplify-sgbusamp-sgbusamp-130444-unauthRole",
+      "StackName": "amplify-sgbusamp-sgbusamp-130444",
+      "StackId": "arn:aws:cloudformation:us-west-2:628236119651:stack/amplify-sgbusamp-sgbusamp-130444/68e622c0-912a-11ed-b0d3-029f1c758b2f",
+      "AmplifyAppId": "d21ooh8s6woxdg"
+    },
+    "categories": {
+      "function": {
+        "busarrivals": {
+          "deploymentBucketName": "amplify-sgbusamp-sgbusamp-130444-deployment",
+          "s3Key": "amplify-builds/busarrivals-2f56597073724d307031-build.zip"
+        }
+      },
+      "api": {
+        "LTA": {}
+      }
+    }
   }
 }
